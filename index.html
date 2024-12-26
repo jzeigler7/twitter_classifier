@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #0056b3;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+        nav a:hover {
+            background-color: #004494;
+        }
+        h1, h2, h3, h4 {
+            color: #4a4a4a;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+        h2 {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+            color: #0056b3;
+        }
+        p {
+            margin: 0.5em 0;
+        }
+        .section {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            text-align: left;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        .references {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #e2e2e2;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+        ul {
+            text-align: left;
+            margin: 10px 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        ul li {
+            background: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="midterm_checkpoint.html">Midterm Checkpoint</a>
+        <a href="final_report.html">Final Report</a>
+    </nav>
+
+
+    <h1>Project Proposal</h1>
+    <p>Pawan Medidi, Anna Zhao, Simon Luong, Jacob Zeigler, Suhel Keswani</p>
+
+    <div class="section">
+        <h2>Introduction/Background</h2>
+        <p>Over the last decade as social media has become increasingly developed, so has the world of making bots within them. They have become increasingly complex, varied, and abundant, and their volume and influence has sparked international conversation. So, our team thought it would be interesting to classify whether a comment on a social media platform is a human or a bot.</p>
+    </div>
+
+    <div class="section">
+        <h2>Dataset Description</h2>
+        <p>TwiBot-20, developed at Washington University, includes verified human users and various bots, comprising approximately 230K accounts. This dataset encompasses complete post histories and following relationships. For each user, it contains profile information, the 200 most recent tweets, 20 random neighbors/followers, and a bot status indicator. Currently, traditional bot detection methods have proven inconclusive in this dataset.</p>
+        <p>Dataset link: <a href="https://github.com/BunsenFeng/TwiBot-20/tree/main" target="_blank">TwiBot-20</a> (We have the full data)</p>
+    </div>
+
+    <div class="section">
+        <h2>Literature Review</h2>
+        <p>As machine learning advances, numerous studies have emerged on bot detection, each with unique methodologies. Prior reviews highlight that models based on random forests, support vector machines, and convolutional neural networks excel in detecting Twitter bots. Feed Forward Neural Networks, support vector machines, gradient boosting, and multinomial naive Bayes are effective against spam bots. [2] Ongoing research aims to enhance deep learning methods by integrating the best features of existing models to improve text feature utilization and anomaly detection. [3] One study using similar methods to our projected ones looks at how detecting twitter bots can be done more effectively with reduced features finding that only 5 features (number of tweets, followers, mutuals, likes, and lists included) was effective for detecting bots compared to a full feature larger set.[1]</p>
+    </div>
+
+    <div class="section">
+        <h2>Problem Definition</h2>
+        <p><strong>Problem:</strong> Social media platforms are increasingly filled with bots generating vast amounts of content. These bots range from simple spambots to sophisticated conversational bots that engage in harmful activities. Their ability to influence public opinion, spread misinformation, and undermine genuine user interactions poses significant risks.</p>
+        <p><strong>Motivation:</strong> Identifying and categorizing whether a comment is a bot can mitigate the spread of false information, preserve the integrity of social media conversations, and protect public opinion and democratic processes from manipulation.</p>
+        <p><strong>Solution:</strong> We propose a Bot Comment Classification Analysis system using machine learning and natural language processing to identify and classify whether a comment is a human or bot based on their commenting styles. This system will analyze linguistic patterns, posting behaviors, and engagement metrics to distinguish humans from bots, and provide real-time detection to mitigate bot activity. This approach aims to enhance the understanding of bot behavior and contribute to a more trustworthy social media environment.</p>
+    </div>
+
+    <div class="section">
+        <h2>Methods</h2>
+        <p>We will utilize Scikit-Learn and TensorFlow libraries. Our preprocessing methods include lemmatization, tokenization, removing non-alphanumeric characters, and Word2Vec for feature extraction. For supervised learning, we will employ XGBoost, Random Forest, Decision Trees, and K-Nearest Neighbors.</p>
+        <p>We aim to use the following metrics:</p>
+        <ul>
+            <li><strong>Accuracy:</strong> (Correct Classifications) / (Total Classifications)</li>
+            <li><strong>Confusion Matrix:</strong> contains true positives, false positives, true negatives, and false negatives for each class.</li>
+            <li><strong>Precision:</strong> (True positives) / (Total predicted positives)</li>
+            <li><strong>Recall:</strong> (True positives) / (All actual positives)</li>
+            <li><strong>F1 Score:</strong> 2 * (Precision * Recall) / (Precision + Recall)</li>
+        </ul>
+        <p>We aim to achieve 75-85% accuracy, precision, and recall, balancing these metrics to optimize model performance.</p>
+    </div>
+    
+    <div class="section">
+        <h2>Potential Results</h2>
+        <p>We plan to start predicting whether a comment is human or bot based on historical data. Once we can do this reliably, we will gather more current data from this year, similar to our reference dataset, and predict the results for this year's comments. This will enable us to validate our model's accuracy with recent data and ensure its relevance in detecting contemporary bot behaviors.</p>
+    </div>
+
+
+    <div class="section">
+        <h2>Gantt Chart</h2>
+        <p>List each member’s planned responsibilities for the entirety of the project.</p>
+        <img src="gantchartpicpt5.png" alt="Gantt Chart">
+    </div>
+
+    <div class="section">
+        <h2>Contribution Table</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Proposal Contributions</th>
+            </tr>
+            <tr>
+                <td>Anna</td>
+                <td>Introduction/Background, Literature Review, Dataset Description</td>
+            </tr>
+            <tr>
+                <td>Pawan</td>
+                <td>Problem Definition, Methods</td>
+            </tr>
+            <tr>
+                <td>Simon</td>
+                <td>Methods</td>
+            </tr>
+            <tr>
+                <td>Suhel</td>
+                <td>Potential Results and Discussion</td>
+            </tr>
+            <tr>
+                <td>Jacob</td>
+                <td>Potential Results and Discussion, Gantt Chart, GitHub Repository</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="references section">
+        <h2>References</h2>
+        <p>[1] J. V. Fonseca Abreu, C. Ghedini Ralha and J. J. Costa Gondim, "Twitter Bot Detection with Reduced Feature Set," 2020 IEEE International Conference on Intelligence and Security Informatics (ISI), Arlington, VA, USA, 2020, pp. 1-6, doi: 10.1109/ISI49825.2020.9280525.</p>
+        <p>[2] M. Aljabri, R. Zagrouba, A. Shaahid, F. Alnasser, A. Saleh, and D. M. Alomari, “Machine learning-based social media bot detection: a comprehensive literature review,” Social Network Analysis and Mining, vol. 13, no. 1, Jan. 2023, doi: https://doi.org/10.1007/s13278-022-01020-5.</p>
+        <p>[3] K. Hayawi, S. Saha, M. M. Masud, S. S. Mathew, and M. Kaosar, “Social media bot detection with deep learning methods: a systematic review,” Neural Computing and Applications, vol. 35, Mar. 2023, doi: https://doi.org/10.1007/s00521-023-08352-z.</p>
+    </div>
+</body>
+</html>

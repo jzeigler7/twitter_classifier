@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midterm Checkpoint</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #0056b3;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+        nav a:hover {
+            background-color: #004494;
+        }
+        h1, h2, h3, h4 {
+            color: #4a4a4a;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+        h2 {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+            color: #0056b3;
+        }
+        p {
+            margin: 0.5em 0;
+        }
+        .section {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            text-align: left;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        .references {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #e2e2e2;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+        ul {
+            text-align: left;
+            margin: 10px 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        ul li {
+            background: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .subsection {
+            margin-top: 20px;
+        }
+        .subsection h3 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .subsection p, .subsection ul {
+            margin-left: 20px;
+        }
+        .highlight {
+            background-color: #e7f3ff;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="midterm_checkpoint.html">Midterm Checkpoint</a>
+        <a href="final_report.html">Final Report</a>
+    </nav>
+
+
+    <h1>Midterm Checkpoint</h1>
+
+    <div class="section">
+        <h2>Results and Discussion</h2>
+        
+        <div class="subsection">
+            <h3>MobileBERT Embeddings and Data Processing</h3>
+            <p>We processed the text data using MobileBERT, extracting embeddings and normalizing them. The final DataFrame (<code>final_df</code>) contains 17161 rows and 515 columns, with each row representing a tweet and its associated embeddings. We use 511 different features extracted from the text content of each tweet. An important thing to note is that right now we truncate each tweet at 127 characters; using all of the text could improve results.</p>
+        </div>
+
+        <div class="subsection">
+            <h3>XGBoost Classifier</h3>
+            <p class="highlight"><strong>Error Encountered:</strong> We faced an issue loading the XGBoost library due to the missing OpenMP runtime on the system.</p>
+            <p><strong>Next Steps:</strong> Resolve the issue by installing the OpenMP library and reattempt running the XGBoost model. This step is crucial for leveraging the power of gradient boosting for classification.</p>
+        </div>
+
+        <div class="subsection">
+            <h3>KNN Classifier</h3>
+            <div class="highlight">
+                <p><strong>Results:</strong></p>
+                <ul>
+                    <li><strong>Accuracy:</strong> 0.785</li>
+                    <li><strong>Precision:</strong> 0.100</li>
+                    <li><strong>Recall:</strong> 0.003</li>
+                    <li><strong>F1 Score:</strong> 0.005</li>
+                </ul>
+                <img src="AccuracyVsNumberNeighbors.png" alt="Accuracy vs Number of Neighbors">
+            </div>
+            <p><strong>Visualization:</strong> The accuracy vs. number of neighbors plot indicates how model performance changes with different values of k. The best accuracy was achieved with 14 neighbors.</p>
+        </div>
+
+        <div class="subsection">
+            <h3>Discussion</h3>
+            <div class="highlight">
+                <p><strong>Justification of Results:</strong></p>
+                <p>High accuracy and low precision; low F1 score can be attributed to class imbalance, with a high majority of human tweets. The KNN model cannot capture the complexity of text data with high sentiment and is likely overfitting the data.</p>
+            </div>
+            <p><strong>Performance Analysis:</strong> The KNN model achieved an accuracy of 78.5%, which is fairly good. However, the precision, recall, and F1 scores are very low. This suggests that while the model correctly classifies a significant number of tweets overall, it struggles to correctly identify and distinguish between the two classes (human vs. bot).</p>
+            <p><strong>Reasoning:</strong> The low precision and recall indicate that the model is not effectively capturing the nuances in the data that differentiate bots from humans. KNN might not be the best fit for this task due to the high dimensionality of the embeddings and the nature of the data.</p>
+        </div>
+
+        <div class="subsection">
+            <h3>Visuals</h3>
+            <img src="DistributionOfHumanAndBotTweets.png" alt="Distribution of Human and Bot Tweets">
+            <p> 13630 human data points and 3531 bot data points. </p>
+            <img src="precisionfordifftestsizes.png" alt="Precision for Different Test Sizes">
+            <img src="recallfordifftestsizes.png" alt="Recall for Different Test Sizes">
+            <img src="f1scorefordifftestsizes.png" alt="F1 Score for Different Test Sizes">
+            <img src="accuracyfordifftestsizes.png" alt="Accuracy for Different Test Sizes">
+            <img src="precisionrecallimg.png" alt="Precision Recall Image">
+            <p> So in reality, we have accuracies where our lowest is 78.5% and our highest is 79.46%.</p>
+        </div>
+
+        <div class="subsection">
+            <h3>Next Steps</h3>
+            <ul>
+                <li>Model Optimization: Continue tuning hyperparameters for KNN to see if performance can be improved.</li>
+                <li>Alternative Models: Explore other models such as SVM, Random Forest, or neural networks which might handle the complexity of the data better.</li>
+                <li>Feature Engineering: Perform further feature engineering to better capture the distinguishing features between human and bot tweets.</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h3>Conclusion</h3>
+            <p><strong>KNN Classifier:</strong> While achieving a decent accuracy, the KNN model needs improvement in precision and recall.</p>
+            <p><strong>XGBoost Classifier:</strong> Resolving the dependency issue is crucial to evaluating its performance.</p>
+            <p><strong>Neural Network:</strong> Further evaluation and fine-tuning are necessary to validate the model's effectiveness for energy prediction.</p>
+
+            <h3>Overall Next Steps</h3>
+            <ul>
+                <li>Resolve XGBoost Issues: Install the necessary libraries and re-evaluate the model.</li>
+                <li>Optimize KNN and Explore Alternatives: Continue hyperparameter tuning and explore other classification models.</li>
+                <li>Fine-tune Neural Network: Ensure all evaluation metrics are captured and improve model performance.</li>
+            </ul>
+
+            <p>These steps will help in achieving a more accurate and reliable classification of tweets and better energy consumption predictions.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Why We Use These Models</h2>
+        <div class="subsection">
+            <h3>XGBoost</h3>
+            <ul>
+                <li><strong>Handles Imbalanced Data:</strong> XGBoost can manage class imbalance effectively through weight adjustments and custom loss functions, ensuring better performance in identifying minority classes.</li>
+                <li><strong>Captures Complex Relationships:</strong> With its boosting technique, XGBoost excels at capturing complex, non-linear relationships in high-dimensional data, making it suitable for nuanced differences in text embeddings.</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h3>KNN (K-Nearest Neighbors)</h3>
+            <ul>
+                <li><strong>Simple and Intuitive:</strong> KNN is straightforward to implement and understand, making it a great starting point for initial model development and benchmarking.</li>
+                <li><strong>Effective Local Pattern Recognition:</strong> By classifying based on the closest neighbors, KNN can effectively identify local patterns and clusters within the data, which can be useful for distinguishing similar comments.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Midterm Contributions</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Midterm Contributions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Pawan Medidi</td>
+                    <td>Coded the GitHub Pages, created the ReadMe and added all info, and met with the TA to finalize and discuss changes neeeded. </td>
+                </tr>
+                <tr>
+                    <td>Anna Zhao</td>
+                    <td>Initial proposal information, data preprocessing, modeling.</td>
+                </tr>
+                <tr>
+                    <td>Simon Luong</td>
+                    <td>Cleaning the dataset, analyzing it, getting features, setting up the KNN, and running that model on our data.</td>
+                </tr>
+                <tr>
+                    <td>Suhel Keswani</td>
+                    <td>Making interpreting our results, and making/getting all the visuals/statistics for the data we used and the results we got from that.</td>
+                </tr>
+                <tr>
+                    <td>Jacob Zeigler</td>
+                    <td>Helped with proposal.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

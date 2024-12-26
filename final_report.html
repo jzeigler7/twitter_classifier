@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Report</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #0056b3;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+        nav a:hover {
+            background-color: #004494;
+        }
+        h1, h2, h3, h4 {
+            color: #4a4a4a;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+        h2 {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+            color: #0056b3;
+        }
+        p {
+            margin: 0.5em 0;
+        }
+        .section {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            text-align: left;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        .references {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #e2e2e2;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+        ul {
+            text-align: left;
+            margin: 10px 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        ul li {
+            background: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="midterm_checkpoint.html">Midterm Checkpoint</a>
+        <a href="final_report.html">Final Report</a>
+    </nav>
+
+    <h1>Final Report</h1>
+    <p>Pawan Medidi, Anna Zhao, Simon Luong, Jacob Zeigler, Suhel Keswani</p>
+
+    <div class="section">
+        <h2>Introduction/Background</h2>
+        <p>Over the last decade as social media has become increasingly developed, so has the world of making bots within them. They have become increasingly complex, varied, and abundant, and their volume and influence have sparked a lot of conversation. Our team aims to classify whether a comment on a social media platform is a human or a bot.</p>
+        <h3>Literature Review</h3>
+        <p>As machine learning advances, numerous studies have emerged on bot detection, each with unique methodologies. Prior reviews highlight that models based on random forests, support vector machines, and convolutional neural networks excel in detecting Twitter bots. Feed Forward Neural Networks, support vector machines, gradient boosting, and multinomial naive Bayes are effective against spam bots. Ongoing research aims to enhance deep learning methods by integrating the best features of existing models to improve text feature utilization and anomaly detection. One study using similar methods to our projected ones looks at how detecting twitter bots can be done more effectively with reduced features finding that only 5 features (number of tweets, followers, mutuals, likes, and lists included) was effective for detecting bots compared to a full feature larger set.</p>
+        <h3>Dataset Description</h3>
+        <p>We utilized the TwiBot-20 dataset, developed at Washington University, which includes verified human users and various bots, comprising approximately 230K accounts. This dataset encompasses complete post histories and following relationships. For each user, it contains profile information, the 200 most recent tweets, 20 random neighbors/followers, and a bot status indicator. Currently, traditional bot detection methods have proven inconclusive in this dataset.</p>
+        <p>Dataset link: <a href="https://github.com/BunsenFeng/TwiBot-20/tree/main" target="_blank">TwiBot-20</a> (We have the full data)</p>
+    </div>
+
+    <div class="section">
+        <h2>Problem Definition</h2>
+        <p><strong>Problem:</strong> Social media platforms are increasingly filled with bots generating vast amounts of content. These bots range from simple spambots to sophisticated conversational bots that engage in harmful activities. Their ability to influence public opinion, spread misinformation, and undermine genuine user interactions poses significant risks.</p>
+        <p><strong>Motivation:</strong> Identifying and categorizing whether a comment is a bot can mitigate the spread of false information, preserve the integrity of social media conversations, and protect public opinion and democratic processes from manipulation.</p>
+        <p><strong>Solution:</strong> We propose a Bot Comment Classification Analysis system using machine learning and natural language processing to identify and classify whether a comment is a human or bot based on their commenting styles. This system will analyze linguistic patterns, posting behaviors, and engagement metrics to distinguish humans from bots, and provide real-time detection to mitigate bot activity. This approach aims to enhance the understanding of bot behavior and contribute to a more trustworthy social media environment.</p>
+    </div>
+
+    <div class="section">
+        <h2>Methods</h2>
+        <p>We utilized the TwiBot-20 dataset, developed at Washington University, which includes verified human users and various bots, comprising approximately 230K accounts. For this project, we focused on the following machine learning algorithms: K-Nearest Neighbors (KNN), Random Forest, and a Neural Network model.</p>
+        <p>Our preprocessing methods included:</p>
+        <ul>
+            <li>Tokenization</li>
+            <li>Lemmatization</li>
+            <li>Removing non-alphanumeric characters</li>
+            <li>Truncating text to a fixed length</li>
+            <li>Using MobileBERT for feature extraction</li>
+        </ul>
+        <p>We utilized Scikit-Learn and TensorFlow libraries for model implementation. Our evaluation metrics included accuracy, precision, recall, and F1 score.</p>
+    </div>
+
+    <div class="section">
+        <h2>Results and Discussion</h2>
+        <div class="subsection">
+            <h3>K-Nearest Neighbors (KNN) Classifier</h3>
+            <ul>
+                <li><strong>Accuracy:</strong> 0.785</li>
+                <li><strong>Precision:</strong> 0.100</li>
+                <li><strong>Recall:</strong> 0.003</li>
+                <li><strong>F1 Score:</strong> 0.005</li>
+            </ul>
+            <img src="AccuracyVsNumberNeighbors.png" alt="Accuracy vs Number of Neighbors">
+            <p>The KNN model achieved an accuracy of 78.5%, which is fairly good. However, the precision, recall, and F1 scores are very low. This suggests that while the model correctly classifies a significant number of tweets overall, it struggles to correctly identify and distinguish between the two classes (human vs. bot).</p>
+        </div>
+
+        <div class="subsection">
+            <h3>Random Forest Classifier</h3>
+            <ul>
+                <li><strong>Accuracy:</strong> 0.790</li>
+                <li><strong>Precision:</strong> 0.624</li>
+                <li><strong>Recall:</strong> 0.790</li>
+                <li><strong>F1 Score:</strong> 0.697</li>
+            </ul>
+            <img src="rf_minsamples.png" alt="Effect of min_samples_split on Performance Metrics (Random Forest)">
+            <img src="rf_nestimators.png" alt="Effect of n_estimators on Performance Metrics (Random Forest)">
+            <img src="rf_maxdepth.png" alt="Effect of max_depth on Performance Metrics (Random Forest)">
+            <p>The Random Forest model showed improved performance with an accuracy of 79.0%, precision of 62.4%, recall of 79.0%, and an F1 score of 69.7%. This indicates that the model is better at distinguishing between humans and bots compared to KNN.</p>
+        </div>
+
+        <div class="subsection">
+            <h3>Neural Network Model</h3>
+            <ul>
+                <li><strong>Accuracy:</strong> 0.795</li>
+                <li><strong>Precision:</strong> 0.632</li>
+                <li><strong>Recall:</strong> 0.795</li>
+                <li><strong>F1 Score:</strong> 0.704</li>
+            </ul>
+            <img src="nn_dropoutrate.png" alt="Effect of Dropout Rate on Performance Metrics (Neural Network)">
+            <img src="nn_learningrate.png" alt="Effect of Learning Rate on Performance Metrics (Neural Network)">
+            <img src="nn_hiddenlayers.png" alt="Effect of Units in Hidden Layers on Performance Metrics (Neural Network)">
+            <p>The Neural Network model achieved the highest accuracy at 79.5%, with a precision of 63.2%, recall of 79.5%, and an F1 score of 70.4%. This indicates that neural networks, with their capacity to learn complex patterns, performed the best among the models we tested.</p>
+        </div>
+
+        <div class="subsection">
+            <h3>Comparison of Models</h3>
+            <img src="ComparingModelPerformance.png" alt="Comparison of Model Performance">
+            <table>
+                <tr>
+                    <th>Model</th>
+                    <th>Accuracy</th>
+                    <th>Precision</th>
+                    <th>Recall</th>
+                    <th>F1 Score</th>
+                </tr>
+                <tr>
+                    <td>KNN</td>
+                    <td>0.785</td>
+                    <td>0.100</td>
+                    <td>0.003</td>
+                    <td>0.005</td>
+                </tr>
+                <tr>
+                    <td>Random Forest</td>
+                    <td>0.790</td>
+                    <td>0.624</td>
+                    <td>0.790</td>
+                    <td>0.697</td>
+                </tr>
+                <tr>
+                    <td>Neural Network</td>
+                    <td>0.795</td>
+                    <td>0.632</td>
+                    <td>0.795</td>
+                    <td>0.704</td>
+                </tr>
+            </table>
+            <p>From our analysis, the Neural Network model showed the best performance, followed by the Random Forest model. The KNN model, while simple and intuitive, did not perform well for this classification task.</p>
+        </div>
+
+        <div class="subsection">
+            <h3>Next Steps</h3>
+            <ul>
+                <li>Further optimize hyperparameters for the Random Forest and Neural Network models to potentially improve their performance.</li>
+                <li>Explore other advanced models like Transformers which might offer better performance in handling text data.</li>
+                <li>Consider using more sophisticated feature engineering techniques to enhance the model's ability to distinguish between human and bot comments.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Gantt Chart</h2>
+        <img src="gantchartpicpt5.png" alt="Gantt Chart">
+    </div>
+
+    <div class="section">
+        <h2>Contribution Table</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Final Contributions</th>
+            </tr>
+            <tr>
+                <td>Anna Zhao</td>
+                <td>Introduction/Background, Dataset Description, Data Preprocessing</td>
+            </tr>
+            <tr>
+                <td>Pawan Medidi</td>
+                <td>Problem Definition, Methods, GitHub Repository</td>
+            </tr>
+            <tr>
+                <td>Simon Luong</td>
+                <td>Model Implementation, Data Analysis, Data preprocessing</td>
+            </tr>
+            <tr>
+                <td>Suhel Keswani</td>
+                <td>Results and Discussion, Visualizations</td>
+            </tr>
+            <tr>
+                <td>Jacob Zeigler</td>
+                <td>Slides setup and Visualizations</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="references section">
+        <h2>References</h2>
+        <p>[1] J. V. Fonseca Abreu, C. Ghedini Ralha and J. J. Costa Gondim, "Twitter Bot Detection with Reduced Feature Set," 2020 IEEE International Conference on Intelligence and Security Informatics (ISI), Arlington, VA, USA, 2020, pp. 1-6, doi: 10.1109/ISI49825.2020.9280525.</p>
+        <p>[2] M. Aljabri, R. Zagrouba, A. Shaahid, F. Alnasser, A. Saleh, and D. M. Alomari, “Machine learning-based social media bot detection: a comprehensive literature review,” Social Network Analysis and Mining, vol. 13, no. 1, Jan. 2023, doi: https://doi.org/10.1007/s13278-022-01020-5.</p>
+        <p>[3] K. Hayawi, S. Saha, M. M. Masud, S. S. Mathew, and M. Kaosar, “Social media bot detection with deep learning methods: a systematic review,” Neural Computing and Applications, vol. 35, Mar. 2023, doi: https://doi.org/10.1007/s00521-023-08352-z.</p>
+    </div>
+</body>
+</html>
